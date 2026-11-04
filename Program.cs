@@ -24,10 +24,14 @@ app.MapGet("/version", () => new
     message = "Nova funcionalidade da versão 1.1"
 });
 
+// Endpoint de Health Check corrigido para responder com sucesso (200 OK)
 app.MapGet("/health", () =>
-    Results.StatusCode(
-        StatusCodes.Status500InternalServerError
-    )
+    Results.Ok(new
+    {
+        status = "Healthy",
+        environment,
+        version
+    })
 );
 
 app.Run();
